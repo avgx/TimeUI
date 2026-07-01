@@ -18,7 +18,8 @@ struct PickerContainer<Content: View>: View {
     }
 
     var body: some View {
-        PickerStyledContent(content: content)
+        content()
+            .pickerCapsuleStyled()
             .onTapGesture {
                 showSheet = true
             }

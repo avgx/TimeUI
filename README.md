@@ -13,6 +13,28 @@ Shows a custom-styled label while opening the **system** date/time picker on tap
 | `TimePickerContainer` | Time-only capsule (with ms and AM/PM) |
 | `TimeLabel` | Standalone time display (ms + AM/PM), reusable outside pickers |
 
+### Capsule style
+
+Apply on the root HUD view — applies to all pickers inside:
+
+```swift
+public enum PickerCapsuleStyle {
+    case clear     // label only, no background
+    case material  // default — ultraThinMaterial
+    case glass     // Liquid Glass on iOS 26+; material fallback elsewhere
+}
+
+DateTimePickerContainer(
+    selection: $playbackDate,
+    layout: .vstack,
+    value: currentFrameTimestamp
+)
+.pickerCapsuleStyle(.glass)
+.preferredColorScheme(.dark)
+```
+
+Default is `.material` when the modifier is omitted.
+
 ## Usage
 
 ```swift
@@ -104,4 +126,4 @@ TimePickerContainer(
 
 ## Design notes
 
-Platform-specific picker interaction lives in `Internal/PickerContainer-*.swift`. Public views share `PickerStyledContent` for consistent capsule styling. `Spacer` areas in `DateTimePickerContainer` use `.allowsHitTesting(false)` so taps pass through to the video layer.
+Platform-specific picker interaction lives in `Internal/PickerContainer-*.swift`. Capsule label styling uses `View.pickerCapsuleStyled()` driven by `.pickerCapsuleStyle(_:)` on an ancestor view. `Spacer` areas in `DateTimePickerContainer` use `.allowsHitTesting(false)` so taps pass through to the video layer.

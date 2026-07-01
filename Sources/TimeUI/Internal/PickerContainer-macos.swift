@@ -21,7 +21,7 @@ struct PickerContainer<Content: View>: View {
         Button {
             showPopover = true
         } label: {
-            PickerStyledContent(content: content)
+            content().pickerCapsuleStyled()
         }
         .buttonStyle(.plain)
         .popover(isPresented: $showPopover, arrowEdge: .bottom) {

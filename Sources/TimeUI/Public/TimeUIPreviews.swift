@@ -147,6 +147,20 @@ private struct DateTimePreviewContainer: View {
     PreviewContainer(appearance: .vms)
 }
 
+#if os(iOS)
+#Preview("Glass VMS") {
+    PreviewContainer(date: previewAfternoon, appearance: .vms)
+        .pickerCapsuleStyle(.glass)
+        .environment(\.locale, Locale(identifier: "en_US"))
+}
+
+#Preview("Clear VMS") {
+    PreviewContainer(date: previewAfternoon, appearance: .vms)
+        .pickerCapsuleStyle(.clear)
+        .environment(\.locale, Locale(identifier: "en_US"))
+}
+#endif
+
 #Preview("TimeLabel en_US Light") {
     TimeLabelPreviewContainer(date: previewAfternoon, appearance: .light)
         .environment(\.locale, Locale(identifier: "en_US"))
