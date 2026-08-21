@@ -3,13 +3,19 @@ import SwiftUI
 public struct TimePickerContainer: View {
     @Binding private var selection: Date
     private let value: Date?
+    private let allowedFrom: Date?
+    private let allowedThrough: Date?
 
     public init(
         selection: Binding<Date>,
-        value: Date? = nil
+        value: Date? = nil,
+        allowedFrom: Date? = nil,
+        allowedThrough: Date? = nil
     ) {
         self._selection = selection
         self.value = value
+        self.allowedFrom = allowedFrom
+        self.allowedThrough = allowedThrough
     }
 
     private var effectiveDate: Date {
@@ -20,8 +26,8 @@ public struct TimePickerContainer: View {
         PickerContainer(
             selection: $selection,
             mode: .time,
-            allowedFrom: nil,
-            allowedThrough: nil
+            allowedFrom: allowedFrom,
+            allowedThrough: allowedThrough
         ) {
             TimeLabel(date: effectiveDate)
         }
